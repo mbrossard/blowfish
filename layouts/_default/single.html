@@ -56,14 +56,14 @@
     {{ if or $taxonomyLink $showAuthor }}
     <div class="mb-5"></div>
     {{ end }}
-  
+
   </header>
-  
+
   <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
-    
+
     {{ if or (and (.Params.showTableOfContents | default (.Site.Params.article.showTableOfContents | default false)) (in
     .TableOfContents "<ul")) (.Site.Params.article.showRelatedPosts | default false) }} <div
-      class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+      class="order-first sm:max-w-full lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
       <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky {{ if hasPrefix .Site.Params.header.layout "fixed" -}}
         lg:top-[140px]{{ else }}lg:top-10{{ end }}">
 
@@ -74,18 +74,18 @@
       {{ end }}
 
       <div class="min-w-0 min-h-0 max-w-fit">
-        
+
         {{ partial "series.html" . }}
 
-        <div class="max-w-prose mb-20">
+        <div class="max-w-fit mb-20">
           {{ .Content | emojify }}
         </div>
-                
+
         {{ partial "series-closed.html" . }}
         {{ partial "sharing-links.html" . }}
-        {{ partial "related.html" . }}  
+        {{ partial "related.html" . }}
       </div>
-     
+
      <script>
         var oid = "views_{{ .File.Path }}"
         var oid_likes = "likes_{{ .File.Path }}"
@@ -93,9 +93,9 @@
       {{ $jsPage := resources.Get "js/page.js" }}
       {{ $jsPage = $jsPage | resources.Minify | resources.Fingerprint "sha512" }}
       <script type="text/javascript" src="{{ $jsPage.RelPermalink }}" integrity="{{ $jsPage.Data.Integrity }}"></script>
-  
+
     </section>
-  <footer class="pt-8 max-w-prose print:hidden">
+  <footer class="pt-8 max-w-fit print:hidden">
 
     {{ partial "article-pagination.html" . }}
     {{ if .Params.showComments | default (.Site.Params.article.showComments | default false) }}
